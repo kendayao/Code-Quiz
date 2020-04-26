@@ -4,7 +4,7 @@ body {
     
 }
 
-button {
+.start-button {
     background-color: #035AA6;
     color: white;
     padding: 10px;
