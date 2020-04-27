@@ -47,10 +47,7 @@ var questions = [
 
   startButton.addEventListener("click", function(){
 
-    setInterval(function(event){
-        timer--;
-        document.body.querySelector("#timeclock").textContent= timer;
-    }, 1000);
+    timerSet ();
     
     indexOfQuestion = 0;
     showQuestion(indexOfQuestion);
@@ -60,7 +57,7 @@ var questions = [
     questionAnswer.innerHTML= questions[a].question;
     var oLEl = document.createElement("ol");
     questionAnswer.appendChild(oLEl);
-    oLEl.setAttribute("style", "list-style-type: none", "text-align:center")
+    oLEl.setAttribute("style", "list-style-type: none;")
     oLEl.innerHTML ="";
     var liEL1 = document.createElement("li")
     liEL1.innerHTML = questions[a].answer1;
@@ -75,32 +72,51 @@ var questions = [
     liEL4.innerHTML = questions[a].answer4;
     oLEl.appendChild(liEL4);
 
-        
+       
    
     oLEl.addEventListener("click",function(event){
-        console.log(event.target.innerHTML)
-        console.log(indexOfQuestion)
-        console.log(questions[indexOfQuestion].correct)
-        if(event.target.innerHTML===questions[indexOfQuestion].correct){
-            
-            document.body.querySelector("#answerStatus").innerHTML = "<h3>Correct!</h3>"
-            
-        } else {
-            document.body.querySelector("#answerStatus").innerHTML = "<h3>Incorrect!</h3>"
-            timer=timer-10;
-        }
+        checkAnswer();
 
+        console.log(indexOfQuestion)
+        console.log(questions.length)
+       
+        if(indexOfQuestion ===questions.length-1){
+           alert ("done")
+        }
+       
+       else{
+       
         indexOfQuestion++;
        showQuestion(indexOfQuestion);
+       
+       }
     });
 }
 
 
+function checkAnswer(){
+    if(event.target.innerHTML===questions[indexOfQuestion].correct){
+        document.body.querySelector("#answerStatus").innerHTML = "<h3>Correct!</h3>"
+    } else {
+        document.body.querySelector("#answerStatus").innerHTML = "<h3>Incorrect!</h3>"
+        
+        timer=timer-10;
+    }
+
+}
 
 
-
-
-
+function timerSet (){
+var timeInterval = setInterval(function(event){
+    timer--;
+    document.body.querySelector("#timeclock").textContent= timer;
+    if(timer === 0) {
+        clearInterval(timeInterval);
+        alert("Time done");
+        
+      }
+}, 1000);
+}
 
     
 
