@@ -21,7 +21,7 @@ var questions = [
         answer3: "<button>c. booleans</button>",
         answer4: "<button>d. all of the above</button>",
         correct: "d. all of the above"
-},
+    },
         {   question: "<h3>Commonly used data types DO NOT include:</h3>",
         answer1: "<button>a. strings</button>",
         answer2: "<button>b. booleans</button>",
@@ -29,26 +29,28 @@ var questions = [
         answer4: "<button>d. numbers</button>",
         correct: "c. alerts"
     },
-    {question: "<h3>Arrays in Javascript can be used to store ___</h3>",
-    answer1: "<button>a. numbers and strings</button>",
-    answer2: "<button>b. other arrays</button>",
-    answer3: "<button>c. booleans</button>",
-    answer4: "<button>d. all of the above</button>",
-    correct: "d. all of the above"
+
+    {   question: "<h3>Arrays in Javascript can be used to store ___</h3>",
+        answer1: "<button>a. numbers and strings</button>",
+        answer2: "<button>b. other arrays</button>",
+        answer3: "<button>c. booleans</button>",
+        answer4: "<button>d. all of the above</button>",
+        correct: "d. all of the above"
     }]
     
 
     var timer = 75;
     var questionAnswer=document.body.querySelector("#question-container");
     var startButton=document.body.querySelector(".start-button");
-
-    
+    var timeInterval;
+    var quizScore = 0
    
 
   startButton.addEventListener("click", function(){
 
-    timerSet ();
+    startTimer();
     
+
     indexOfQuestion = 0;
     showQuestion(indexOfQuestion);
 });
@@ -77,79 +79,87 @@ var questions = [
     oLEl.addEventListener("click",function(event){
         checkAnswer();
 
-        console.log(indexOfQuestion)
-        console.log(questions.length)
-       
         if(indexOfQuestion ===questions.length-1){
-            document.body.querySelector("#timeclock").textContent= 0
-            
+            clearInterval(timeInterval);
             endQuiz();
             
+           
         }
-       
        else{
-       
         indexOfQuestion++;
        showQuestion(indexOfQuestion);
-       
        }
+      
     });
 }
 
-
+var oneSecond
 function checkAnswer(){
+    var oneSecond = setInterval(setTimer, 3000)
     if(event.target.innerHTML===questions[indexOfQuestion].correct){
-        document.body.querySelector("#answerStatus").innerHTML = "<h3>Correct!</h3>"
+        document.body.querySelector("#correct").setAttribute("style", "display: box");
+        quizScore++;
     } else {
-        document.body.querySelector("#answerStatus").innerHTML = "<h3>Incorrect!</h3>"
-        
+        document.body.querySelector("#incorrect").setAttribute("style", "display: box");
         timer=timer-10;
+           
     }
+}
 
+function setTimer() {
+    var internalTimer = 1
+    document.body.querySelector("#correct").setAttribute("style", "display: none");
+    document.body.querySelector("#incorrect").setAttribute("style", "display: none");
+     clearInterval(oneSecond)
+    if(internalTimer === 0) {
+       
+        clearInterval(oneSecond)    
+    
+    }
 }
 
 
-function timerSet (){
-var timeInterval = setInterval(function(event){
-    timer--;
-    document.body.querySelector("#timeclock").textContent= timer;
-    if(timer === 0) {
-        clearInterval(timeInterval);
-        endQuiz();
-        
-      }
-}, 1000);
-}
+
+
 
 function endQuiz(){
-    
+   
 questionAnswer.innerHTML = "";
 var h2El = document.createElement("h2")
-var pEl = document.createElement("p")
-var inputEl1 = document.createElement("input")
-var inputEl2= document.createElement("input")
+var pEl1 = document.createElement("p")
+var pEl2 = document.createElement("p")
+var inputEl = document.createElement("input")
+var buttonEl= document.createElement("button")
 
 h2El.innerHTML = "All done!"
-pEl.innerHTML ="You score is 55"
-inputEl1.innerHTML = "<input>"
-
+pEl1.innerHTML ="You score is " + ((quizScore/questions.length)*100)
+pEl2.innerHTML ="Enter Initials:"
+buttonEl.innerHTML = "Submit"
 questionAnswer.appendChild(h2El)
-questionAnswer.appendChild(pEl)
-questionAnswer.appendChild(inputEl1)
-questionAnswer.appendChild(inputEl2)
+questionAnswer.appendChild(pEl1)
+questionAnswer.appendChild(pEl2)
+pEl2.setAttribute("style", "margin-bottom: 5px; color: #035AA6; font-size: 18px;" )
+questionAnswer.appendChild(inputEl)
+inputEl.setAttribute("style", "margin-right: 5px;")
+questionAnswer.appendChild(buttonEl)
+}
 
 
-
+function startTimer (){
+    var timeInterval = setInterval(function(){
+        timer--;
+        document.body.querySelector("#timeclock").textContent= timer;
+        if(timer <= 0) {
+            document.body.querySelector("#timeclock").textContent="",
+            clearInterval(timeInterval);
+            endQuiz();
+            }
+    }, 1000);
 
 }
 
 
 
-
-
-
-    
-
     
 
 
@@ -178,84 +188,19 @@ questionAnswer.appendChild(inputEl2)
 
 
 
+// var timeInterval = setInterval(function(){
+//     timer--;
+//     document.body.querySelector("#timeclock").textContent= timer;
 
 
-    
-//     questionAnswer.innerHTML= questions[0].question;
-//     var oLEl = document.createElement("ol");
-//     questionAnswer.appendChild(oLEl);
-//     oLEl.setAttribute("style", "list-style-type: none")
-//     var liEL1 = document.createElement("li")
-//     liEL1.innerHTML = questions[0].answer1;
-//     oLEl.appendChild(liEL1);
-//     var liEL2 = document.createElement("li")
-//     liEL2.innerHTML = questions[0].answer2;
-//     oLEl.appendChild(liEL2);
-//     var liEL3 = document.createElement("li")
-//     liEL3.innerHTML = questions[0].answer3;
-//     oLEl.appendChild(liEL3);
-//     var liEL4 = document.createElement("li")
-//     liEL4.innerHTML = questions[0].answer4;
-//     oLEl.appendChild(liEL4);
-    
-    
-//     oLEl.addEventListener("click",function(event){
+    // if(timer === 0) {
+    //     clearInterval(timeInterval);
+    //     endQuiz();
         
-//         questionAnswer.innerHTML= questions[1].question;
-//         questionAnswer.appendChild(oLEl);
-//         oLEl.setAttribute("style", "list-style-type: none")
-//         oLEl.innerHTML ="";
-//         var liEL1 = document.createElement("li")
-//         liEL1.innerHTML = questions[1].answer1;
-//         oLEl.appendChild(liEL1);
-//         var liEL2 = document.createElement("li")
-//         liEL2.innerHTML = questions[1].answer2;
-//         oLEl.appendChild(liEL2);
-//         var liEL3 = document.createElement("li")
-//         liEL3.innerHTML = questions[1].answer3;
-//         oLEl.appendChild(liEL3);
-//         var liEL4 = document.createElement("li")
-//         liEL4.innerHTML = questions[1].answer4;
-//         oLEl.appendChild(liEL4);
+    //   }
+// }, 1000);
 
-
-//         oLEl.addEventListener("click",function(event){
-           
-//             questionAnswer.innerHTML= questions[2].question;
-//             questionAnswer.appendChild(oLEl);
-//             oLEl.setAttribute("style", "list-style-type: none")
-//             oLEl.innerHTML ="";
-//             var liEL1 = document.createElement("li")
-//             liEL1.innerHTML = questions[2].answer1;
-//             oLEl.appendChild(liEL1);
-//             var liEL2 = document.createElement("li")
-//             liEL2.innerHTML = questions[2].answer2;
-//             oLEl.appendChild(liEL2);
-//             var liEL3 = document.createElement("li")
-//             liEL3.innerHTML = questions[2].answer3;
-//             oLEl.appendChild(liEL3);
-//             var liEL4 = document.createElement("li")
-//             liEL4.innerHTML = questions[2].answer4;
-//             oLEl.appendChild(liEL4);
 
     
-//          });
-        
-         
-//     });
-
-
-// });
-
-  
-// if (event.target.innerHTML === questions[0].correct){
-//     var h5El = document.createElement("h5");
-//     h5El.innerHTML ="Correct";
-//     questionAnswer.appendChild(h5El);
-//    }else {
-//     var h5El = document.createElement("h5");
-//     h5El.innerHTML ="Incorrect";
-//     questionAnswer.appendChild(h5El);
-//    }
 
 
