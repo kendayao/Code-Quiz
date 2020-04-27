@@ -81,7 +81,10 @@ var questions = [
         console.log(questions.length)
        
         if(indexOfQuestion ===questions.length-1){
-           alert ("done")
+            document.body.querySelector("#timeclock").textContent= 0
+            
+            endQuiz();
+            
         }
        
        else{
@@ -112,11 +115,38 @@ var timeInterval = setInterval(function(event){
     document.body.querySelector("#timeclock").textContent= timer;
     if(timer === 0) {
         clearInterval(timeInterval);
-        alert("Time done");
+        endQuiz();
         
       }
 }, 1000);
 }
+
+function endQuiz(){
+    
+questionAnswer.innerHTML = "";
+var h2El = document.createElement("h2")
+var pEl = document.createElement("p")
+var inputEl1 = document.createElement("input")
+var inputEl2= document.createElement("input")
+
+h2El.innerHTML = "All done!"
+pEl.innerHTML ="You score is 55"
+inputEl1.innerHTML = "<input>"
+
+questionAnswer.appendChild(h2El)
+questionAnswer.appendChild(pEl)
+questionAnswer.appendChild(inputEl1)
+questionAnswer.appendChild(inputEl2)
+
+
+
+
+}
+
+
+
+
+
 
     
 
