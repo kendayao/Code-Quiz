@@ -74,18 +74,16 @@ var questions = [
     }
 ]
     
-
     var timer = 75;
+    var timeInterval;
     var questionAnswer=document.body.querySelector("#question-container");
     var startButton=document.body.querySelector(".start-button");
-    var timeInterval;
     var quizScore = 0
    
     
     
 
-  startButton.addEventListener("click", function(){
-
+    startButton.addEventListener("click", function(){
     startTimer();
     
 
@@ -117,11 +115,13 @@ var questions = [
     oLEl.addEventListener("click",function(event){
         checkAnswer();
         if (indexOfQuestion ===questions.length-1){
+            clearInterval(timeInterval);
             endQuiz();
         }else{
        
         indexOfQuestion++;
        showQuestion(indexOfQuestion);
+       
         }
       
     });
@@ -153,9 +153,6 @@ function setTimer() {
 }
 
 
-
-
-
 function endQuiz(){
    
 questionAnswer.innerHTML = "";
@@ -178,9 +175,10 @@ inputEl.setAttribute("style", "margin-right: 5px;")
 questionAnswer.appendChild(buttonEl)
 buttonEl.setAttribute("class", "highscore")
 
+console.log(JSON.parse(localStorage.getItem("highscore")))
+highscore = (JSON.parse(localStorage.getItem("highscore"))) || []
 
 submitButton= document.body.querySelector(".highscore")
-
 submitButton.addEventListener("click",function(){
     
 var initials = questionAnswer.querySelector("input").value
@@ -190,13 +188,13 @@ if(initials===""){
     return
 }else{
     
-   console.log(JSON.parse(localStorage.getItem("highscore")))
+
     
-var highscore = {
-    initials: questionAnswer.querySelector("input").value,
+var score1 = {
+    initials: initials,
     score: quizResult,
 }
-
+highscore.push(score1)
 localStorage.setItem("highscore", JSON.stringify(highscore));
 
 // localStorage.setItem("initials", initials)
@@ -210,11 +208,10 @@ window.location.href = "highscore.html"
 
 
 function startTimer (){
-    var timeInterval = setInterval(function(){
+        timeInterval = setInterval(function(){
         timer--;
         document.body.querySelector("#timeclock").textContent= timer;
         if(timer <= 0) {
-            document.body.querySelector("#timeclock").textContent="",
             clearInterval(timeInterval);
             endQuiz();
         }
