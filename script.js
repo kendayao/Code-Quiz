@@ -153,7 +153,7 @@ var initials = questionAnswer.querySelector("input").value
 localStorage.setItem("initials", initials)
 
 window.location.href = "highscore.html"
-console.log(storedInitials)
+
     });
 }
 
