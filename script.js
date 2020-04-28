@@ -84,12 +84,12 @@ var questions = [
     
 
     startButton.addEventListener("click", function(){
-    startTimer();
+        startTimer();
     
 
-    indexOfQuestion = 0;
-    showQuestion(indexOfQuestion);
-});
+        indexOfQuestion = 0;
+        showQuestion(indexOfQuestion);
+    });
 
     function showQuestion(a){
     questionAnswer.innerHTML= questions[a].question;
@@ -175,7 +175,7 @@ inputEl.setAttribute("style", "margin-right: 5px;")
 questionAnswer.appendChild(buttonEl)
 buttonEl.setAttribute("class", "highscore")
 
-console.log(JSON.parse(localStorage.getItem("highscore")))
+
 highscore = (JSON.parse(localStorage.getItem("highscore"))) || []
 
 submitButton= document.body.querySelector(".highscore")
@@ -190,11 +190,11 @@ if(initials===""){
     
 
     
-var score1 = {
+var newScore = {
     initials: initials,
     score: quizResult,
 }
-highscore.push(score1)
+highscore.push(newScore)
 localStorage.setItem("highscore", JSON.stringify(highscore));
 
 // localStorage.setItem("initials", initials)

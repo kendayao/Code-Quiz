@@ -1,4 +1,5 @@
 var highScoreContainer = document.body.querySelector("#highscore-container")
+var displayScore = document.body.querySelector("#displayScore")
 var goBackButton = document.body.querySelector("#goBack")
 var clearButton = document.body.querySelector("#clear")
 
@@ -14,7 +15,7 @@ for (var i = 0; i <storedhighscore.length; i++){
 console.log(result1)
 h3El=document.createElement("h3")
 h3El.textContent= result1.initials + "-" + result1.score
-highScoreContainer.appendChild(h3El)
+displayScore.appendChild(h3El)
 }
 
 }
@@ -27,7 +28,7 @@ clearButton.addEventListener("click", function(){
     // localStorage.removeItem('initials')
     // localStorage.removeItem('score')
 
-    h3El.textContent=""
+    displayScore.textContent="";
 });
 
 render();
