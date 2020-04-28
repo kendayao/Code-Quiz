@@ -182,14 +182,27 @@ buttonEl.setAttribute("class", "highscore")
 submitButton= document.body.querySelector(".highscore")
 
 submitButton.addEventListener("click",function(){
-
+    
 var initials = questionAnswer.querySelector("input").value
 var score = quizResult
-localStorage.setItem("initials", initials)
-localStorage.setItem("score", score)
+if(initials===""){
+    alert("Please enter initials")
+    return
+}else{
+    var arr=[]
+    JSON.parse(localStorage.getItem("highscore"))
+var highscore = {
+    initials: questionAnswer.querySelector("input").value,
+    score: quizResult,
+}
+arr.push(highscore)
+localStorage.setItem("highscore", JSON.stringify(highscore));
+
+// localStorage.setItem("initials", initials)
+// localStorage.setItem("score", score)
 
 window.location.href = "highscore.html"
-
+}
     });
 }
 
