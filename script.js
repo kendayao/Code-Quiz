@@ -142,6 +142,19 @@ pEl2.setAttribute("style", "margin-bottom: 5px; color: #035AA6; font-size: 18px;
 questionAnswer.appendChild(inputEl)
 inputEl.setAttribute("style", "margin-right: 5px;")
 questionAnswer.appendChild(buttonEl)
+buttonEl.setAttribute("class", "highscore")
+
+
+submitButton= document.body.querySelector(".highscore")
+
+submitButton.addEventListener("click",function(){
+
+var initials = questionAnswer.querySelector("input").value
+localStorage.setItem("initials", initials)
+
+window.location.href = "highscore.html"
+console.log(storedInitials)
+    });
 }
 
 
@@ -160,9 +173,9 @@ function startTimer (){
 
 
 
+
+
     
-
-
 
 
 
