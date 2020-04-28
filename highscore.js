@@ -5,9 +5,10 @@ render();
 
 function render(){
 
-var storedInitials = localStorage.getItem("initials")   
+var storedInitials = localStorage.getItem("initials")
+var storedScore = localStorage.getItem("score")   
 h3El=document.createElement("h3")
-h3El.textContent=storedInitials
+h3El.textContent=storedInitials + "-" + storedScore 
 highScoreContainer.appendChild(h3El)
 }
 

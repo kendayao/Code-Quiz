@@ -1,42 +1,78 @@
 var questions = [
     {   question: "<h3>Commonly used data types DO NOT include:</h3>",
-        answer1: "<button>a. strings</button>",
-        answer2: "<button>b. booleans</button>",
-        answer3: "<button>c. alerts</button>",
-        answer4: "<button>d. numbers</button>",
-        correct: "c. alerts"
+        answer1: "<button>A. strings</button>",
+        answer2: "<button>B. booleans</button>",
+        answer3: "<button>C. alerts</button>",
+        answer4: "<button>D. numbers</button>",
+        correct: "C. alerts"
     },
 
       {question: "<h3>The condition in an if/else statement is enclosed within ___.",
-        answer1: "<button>a. quotes</button>",
-        answer2: "<button>b. curly brackets</button>",
-        answer3: "<button>c. parentheses</button>",
-        answer4: "<button>d. square brackets</button>",
-        correct: "b. curly brackets"
+        answer1: "<button>A. quotes</button>",
+        answer2: "<button>B. curly brackets</button>",
+        answer3: "<button>C. parentheses</button>",
+        answer4: "<button>D. square brackets</button>",
+        correct: "B. curly brackets"
     },
 
         {question: "<h3>Arrays in Javascript can be used to store ___</h3>",
-        answer1: "<button>a. numbers and strings</button>",
-        answer2: "<button>b. other arrays</button>",
-        answer3: "<button>c. booleans</button>",
-        answer4: "<button>d. all of the above</button>",
-        correct: "d. all of the above"
+        answer1: "<button>A. numbers and strings</button>",
+        answer2: "<button>B. other arrays</button>",
+        answer3: "<button>C. booleans</button>",
+        answer4: "<button>D. all of the above</button>",
+        correct: "D. all of the above"
     },
-        {   question: "<h3>Commonly used data types DO NOT include:</h3>",
-        answer1: "<button>a. strings</button>",
-        answer2: "<button>b. booleans</button>",
-        answer3: "<button>c. alerts</button>",
-        answer4: "<button>d. numbers</button>",
-        correct: "c. alerts"
+        {question: "<h3>Inside which HTML element do we put the JavaScript?</h3>",
+        answer1: "<button>A. script</button>",
+        answer2: "<button>B. javascript</button>",
+        answer3: "<button>C. js</button>",
+        answer4: "<button>D. scripting</button>",
+        correct: "A. script"
     },
 
-    {   question: "<h3>Arrays in Javascript can be used to store ___</h3>",
-        answer1: "<button>a. numbers and strings</button>",
-        answer2: "<button>b. other arrays</button>",
-        answer3: "<button>c. booleans</button>",
-        answer4: "<button>d. all of the above</button>",
-        correct: "d. all of the above"
-    }]
+    {   question: "<h3>How do you write 'Hello World' in an alert box?</h3>",
+        answer1: "<button>A. msgBox('Hello World')</button>",
+        answer2: "<button>B. alert('Hello World')</button>",
+        answer3: "<button>C. alertBox('Hello World')</button>",
+        answer4: "<button>D. msg('Hello World')</button>",
+        correct: "B. alert('Hello World')"
+    },
+    {   question: "<h3>How do you create a function in JavaScript?</h3>",
+        answer1: "<button>A. function myFunction()</button>",
+        answer2: "<button>B. function:myFunction</button>",
+        answer3: "<button>C. function = myFunction()</button>",
+        answer4: "<button>D. none of the above</button>",
+        correct: "A. function myFunction()"
+    },
+    {   question: "<h3>How do you call a function named 'myFunction'?</h3>",
+        answer1: "<button>A. call myFunction()</button>",
+        answer2: "<button>B. call function myFunction()</button>",
+        answer3: "<button>C. myFunction()</button>",
+        answer4: "<button>D. My Function</button>",
+        correct: "C. myFunction()"
+    },
+    {   question: "<h3>Which of the following is not a valid JavaScript variable name?</h3>",
+        answer1: "<button>A. 2names</button>",
+        answer2: "<button>B. _first_and_last_names</button>",
+        answer3: "<button>C. FirstAndLast</button>",
+        answer4: "<button>D. None of the above</button>",
+        correct: "A. 2names"
+    },
+    {   question: "<h3>What is the correct way to write a JavaScript array?</h3>",
+        answer1: "<button>A. var colors=1=('red'), 2=('green')</button>",
+        answer2: "<button>B. var colors=['red','green','blue']</button>",
+        answer3: "<button>C. var colors=(1. red, 2.green)</button>",
+        answer4: "<button>D. var colors=red,green,blue</button>",
+        correct: "B. var colors=['red','green','blue']"
+    },
+    {   question: "<h3>x=x+y is the same as...</h3>",
+        answer1: "<button>A. x+=y</button>",
+        answer2: "<button>B. x+x=x</button>",
+        answer3: "<button>C. y+y=x</button>",
+        answer4: "<button>D. y=x</button>",
+        correct: "A. x+=y"
+    }
+]
     
 
     var timer = 75;
@@ -45,6 +81,8 @@ var questions = [
     var timeInterval;
     var quizScore = 0
    
+    
+    
 
   startButton.addEventListener("click", function(){
 
@@ -78,17 +116,13 @@ var questions = [
    
     oLEl.addEventListener("click",function(event){
         checkAnswer();
-
-        if(indexOfQuestion ===questions.length-1){
-            clearInterval(timeInterval);
+        if (indexOfQuestion ===questions.length-1){
             endQuiz();
-            
-           
-        }
-       else{
+        }else{
+       
         indexOfQuestion++;
        showQuestion(indexOfQuestion);
-       }
+        }
       
     });
 }
@@ -130,9 +164,9 @@ var pEl1 = document.createElement("p")
 var pEl2 = document.createElement("p")
 var inputEl = document.createElement("input")
 var buttonEl= document.createElement("button")
-
+var quizResult = ((quizScore/questions.length)*100)
 h2El.innerHTML = "All done!"
-pEl1.innerHTML ="You score is " + ((quizScore/questions.length)*100)
+pEl1.innerHTML ="You score is " + quizResult
 pEl2.innerHTML ="Enter Initials:"
 buttonEl.innerHTML = "Submit"
 questionAnswer.appendChild(h2El)
@@ -150,12 +184,15 @@ submitButton= document.body.querySelector(".highscore")
 submitButton.addEventListener("click",function(){
 
 var initials = questionAnswer.querySelector("input").value
+var score = quizResult
 localStorage.setItem("initials", initials)
+localStorage.setItem("score", score)
 
 window.location.href = "highscore.html"
 
     });
 }
+
 
 
 function startTimer (){
@@ -166,12 +203,10 @@ function startTimer (){
             document.body.querySelector("#timeclock").textContent="",
             clearInterval(timeInterval);
             endQuiz();
-            }
+        }
     }, 1000);
 
 }
-
-
 
 
 
