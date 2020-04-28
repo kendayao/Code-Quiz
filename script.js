@@ -189,13 +189,14 @@ if(initials===""){
     alert("Please enter initials")
     return
 }else{
-    var arr=[]
-    JSON.parse(localStorage.getItem("highscore"))
+    
+   console.log(JSON.parse(localStorage.getItem("highscore")))
+    
 var highscore = {
     initials: questionAnswer.querySelector("input").value,
     score: quizResult,
 }
-arr.push(highscore)
+
 localStorage.setItem("highscore", JSON.stringify(highscore));
 
 // localStorage.setItem("initials", initials)
