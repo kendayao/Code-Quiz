@@ -166,7 +166,7 @@ function endQuiz(){
     questionAnswer.appendChild(buttonEl)
     buttonEl.setAttribute("class", "highscore")
 
-    // endQuix function checks for highscore in local storage or creates new array
+    // endQuiz function checks for highscore in local storage or creates new array
     highscore = (JSON.parse(localStorage.getItem("highscore"))) || []
 
     submitButton= document.body.querySelector(".highscore")

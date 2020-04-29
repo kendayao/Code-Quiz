@@ -16,7 +16,7 @@ for (var i = 0; i <storedhighscore.length; i++){
     }
 }
 
-// Go back to mainPafe
+// Go back to Main Page
 goBackButton.addEventListener("click", function(){
     window.location.href = "index.html"
 });
