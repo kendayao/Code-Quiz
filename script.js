@@ -1,3 +1,5 @@
+
+// Quiz Questions Array
 var questions = [
     {   question: "<h3>Commonly used data types DO NOT include:</h3>",
         answer1: "<button>A. strings</button>",
@@ -73,61 +75,55 @@ var questions = [
         correct: "A. x+=y"
     }
 ]
-    
+    // Declared Variables
     var timer = 75;
     var timeInterval;
     var questionAnswer=document.body.querySelector("#question-container");
     var startButton=document.body.querySelector(".start-button");
     var quizScore = 0
    
-    
-    
-
+    // Start Quiz Function: starts timer and displays first question
     startButton.addEventListener("click", function(){
         startTimer();
     
-
         indexOfQuestion = 0;
         showQuestion(indexOfQuestion);
     });
-
+    // show question function: loops through questions array
     function showQuestion(a){
-    questionAnswer.innerHTML= questions[a].question;
-    var oLEl = document.createElement("ol");
-    questionAnswer.appendChild(oLEl);
-    oLEl.setAttribute("style", "list-style-type: none;")
-    oLEl.innerHTML ="";
-    var liEL1 = document.createElement("li")
-    liEL1.innerHTML = questions[a].answer1;
-    oLEl.appendChild(liEL1);
-    var liEL2 = document.createElement("li")
-    liEL2.innerHTML = questions[a].answer2;
-    oLEl.appendChild(liEL2);
-    var liEL3 = document.createElement("li")
-    liEL3.innerHTML = questions[a].answer3;
-    oLEl.appendChild(liEL3);
-    var liEL4 = document.createElement("li")
-    liEL4.innerHTML = questions[a].answer4;
-    oLEl.appendChild(liEL4);
+        questionAnswer.innerHTML= questions[a].question;
+        var oLEl = document.createElement("ol");
+        questionAnswer.appendChild(oLEl);
+        oLEl.setAttribute("style", "list-style-type: none;")
+        oLEl.innerHTML ="";
+        var liEL1 = document.createElement("li")
+        liEL1.innerHTML = questions[a].answer1;
+        oLEl.appendChild(liEL1);
+        var liEL2 = document.createElement("li")
+        liEL2.innerHTML = questions[a].answer2;
+        oLEl.appendChild(liEL2);
+        var liEL3 = document.createElement("li")
+        liEL3.innerHTML = questions[a].answer3;
+        oLEl.appendChild(liEL3);
+        var liEL4 = document.createElement("li")
+        liEL4.innerHTML = questions[a].answer4;
+        oLEl.appendChild(liEL4);
 
-       
-   
+    // when choice gets clicked, checks if answer is correct and if question is the last one
     oLEl.addEventListener("click",function(event){
         checkAnswer();
         if (indexOfQuestion ===questions.length-1){
             clearInterval(timeInterval);
             endQuiz();
         }else{
-       
-        indexOfQuestion++;
-       showQuestion(indexOfQuestion);
-       
-        }
-      
+            indexOfQuestion++;
+            showQuestion(indexOfQuestion);
+       } 
     });
 }
 
-var oneSecond
+var oneSecond;
+// displays correct or incorrect after choice is clicked,
 function checkAnswer(){
     var oneSecond = setInterval(setTimer, 3000)
     if(event.target.innerHTML===questions[indexOfQuestion].correct){
@@ -136,77 +132,64 @@ function checkAnswer(){
     } else {
         document.body.querySelector("#incorrect").setAttribute("style", "display: box");
         timer=timer-10;
-           
+     }
     }
-}
-
 function setTimer() {
-    var internalTimer = 1
+    var internalTimer = 3
     document.body.querySelector("#correct").setAttribute("style", "display: none");
     document.body.querySelector("#incorrect").setAttribute("style", "display: none");
      clearInterval(oneSecond)
     if(internalTimer === 0) {
-       
-        clearInterval(oneSecond)    
-    
+       clearInterval(oneSecond)    
     }
 }
 
+// end quiz function: displays all done page with text input and submit button
+function endQuiz(){  
+    questionAnswer.innerHTML = "";
+    var h2El = document.createElement("h2")
+    var pEl1 = document.createElement("p")
+    var pEl2 = document.createElement("p")
+    var inputEl = document.createElement("input")
+    var buttonEl= document.createElement("button")
+    var quizResult = ((quizScore/questions.length)*100)
+    h2El.innerHTML = "All done!"
+    pEl1.innerHTML ="You score is " + quizResult
+    pEl2.innerHTML ="Enter Initials:"
+    buttonEl.innerHTML = "Submit"
+    questionAnswer.appendChild(h2El)
+    questionAnswer.appendChild(pEl1)
+    questionAnswer.appendChild(pEl2)
+    pEl2.setAttribute("style", "margin-bottom: 5px; color: #035AA6; font-size: 18px;" )
+    questionAnswer.appendChild(inputEl)
+    inputEl.setAttribute("style", "margin-right: 5px;")
+    questionAnswer.appendChild(buttonEl)
+    buttonEl.setAttribute("class", "highscore")
 
-function endQuiz(){
-   
-questionAnswer.innerHTML = "";
-var h2El = document.createElement("h2")
-var pEl1 = document.createElement("p")
-var pEl2 = document.createElement("p")
-var inputEl = document.createElement("input")
-var buttonEl= document.createElement("button")
-var quizResult = ((quizScore/questions.length)*100)
-h2El.innerHTML = "All done!"
-pEl1.innerHTML ="You score is " + quizResult
-pEl2.innerHTML ="Enter Initials:"
-buttonEl.innerHTML = "Submit"
-questionAnswer.appendChild(h2El)
-questionAnswer.appendChild(pEl1)
-questionAnswer.appendChild(pEl2)
-pEl2.setAttribute("style", "margin-bottom: 5px; color: #035AA6; font-size: 18px;" )
-questionAnswer.appendChild(inputEl)
-inputEl.setAttribute("style", "margin-right: 5px;")
-questionAnswer.appendChild(buttonEl)
-buttonEl.setAttribute("class", "highscore")
+    // endQuix function checks for highscore in local storage or creates new array
+    highscore = (JSON.parse(localStorage.getItem("highscore"))) || []
 
-
-highscore = (JSON.parse(localStorage.getItem("highscore"))) || []
-
-submitButton= document.body.querySelector(".highscore")
-submitButton.addEventListener("click",function(){
-    
-var initials = questionAnswer.querySelector("input").value
-var score = quizResult
-if(initials===""){
-    alert("Please enter initials")
-    return
-}else{
-    
-
-    
-var newScore = {
-    initials: initials,
-    score: quizResult,
-}
-highscore.push(newScore)
-localStorage.setItem("highscore", JSON.stringify(highscore));
-
-// localStorage.setItem("initials", initials)
-// localStorage.setItem("score", score)
-
-window.location.href = "highscore.html"
-}
+    submitButton= document.body.querySelector(".highscore")
+    // when submit button is clicked, stores score and inital to local storage and directs to highscore page
+    submitButton.addEventListener("click",function(){
+    var initials = questionAnswer.querySelector("input").value
+    var score = quizResult
+    if(initials===""){
+        alert("Please enter initials")
+        return
+        }else{
+            var newScore = {
+            initials: initials,
+            score: quizResult,
+            }
+    highscore.push(newScore)
+    localStorage.setItem("highscore", JSON.stringify(highscore));
+    window.location.href = "highscore.html"
+    }
     });
 }
 
-
-
+// Start clock and stop clock function
 function startTimer (){
         timeInterval = setInterval(function(){
         timer--;
@@ -214,10 +197,9 @@ function startTimer (){
         if(timer <= 0) {
             clearInterval(timeInterval);
             endQuiz();
-        }
-    }, 1000);
-
-}
+            }
+        }, 1000);
+    }
 
 
 
@@ -247,17 +229,6 @@ function startTimer (){
 
 
 
-// var timeInterval = setInterval(function(){
-//     timer--;
-//     document.body.querySelector("#timeclock").textContent= timer;
-
-
-    // if(timer === 0) {
-    //     clearInterval(timeInterval);
-    //     endQuiz();
-        
-    //   }
-// }, 1000);
 
 
     
