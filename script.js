@@ -167,7 +167,7 @@ function endQuiz(){
     buttonEl.setAttribute("class", "highscore")
 
     // endQuiz function checks for highscore in local storage or creates new array
-    highscore = (JSON.parse(localStorage.getItem("highscore"))) || []
+    var highscore = (JSON.parse(localStorage.getItem("highscore"))) || []
 
     submitButton= document.body.querySelector(".highscore")
     // when submit button is clicked, stores score and inital to local storage and directs to highscore page
