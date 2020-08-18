@@ -2,11 +2,12 @@
 
 ## Description
 
-This web application is a timed multiple choice code quiz. Langauges used for this project are HTML, CSS, and Javascript. 
+Code Quiz is a timed multiple choice code quiz. Users can take the quiz and record their high scores. 
 
 ## Table of Contents
 
 * [Description](#description)
+* [Technology](#technology)
 * [User Story](#user-story)
 * [Installation](#installation)
 * [Usage](#usage)
@@ -16,7 +17,11 @@ This web application is a timed multiple choice code quiz. Langauges used for th
 * [Questions](#questions)
 * [Deployed Application URL](#deployed-application-URL)
 
+## Technology
 
+- HTML
+- CSS
+- JavaScript
 
 ## User Story
 
@@ -64,5 +69,7 @@ For any questions, please contact kendayao at kendayao@gmail.com
 ## Deployed Application URL
 
 Deployed application link: https://kendayao.github.io/Code-Quiz/
+
+Video demo link: https://giphy.com/gifs/chEtXyFkGzGclH4Oqd/fullscreen
 
 <img src="images/codequiz.png" width="400" height="300">
